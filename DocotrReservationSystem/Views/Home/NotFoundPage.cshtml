@@ -1,0 +1,38 @@
+﻿@{
+    Layout = null;  /* Disable _Layout.cshtml */
+    ViewData["Title"] = "404 - Page Not Found";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="~/css/error.css" asp-append-version="true">
+</head>
+<body>
+
+    <!-- Cloak Effect -->
+    <div class="cloak__wrapper">
+        <div class="cloak__container">
+            <div class="cloak"></div>
+        </div>
+    </div>
+
+    <!-- 404 Title -->
+    <h1>404</h1>
+
+    <!-- Information Section -->
+    <div class="info">
+        <h2>We can't find that page</h2>
+        <p>We're fairly sure that page used to be here, but seems to have gone missing. We do apologize on its behalf.</p>
+        <a href="/" class="error-button">Home</a>
+    </div>
+
+    <!-- Link JavaScript file -->
+    <script src="~/js/error.js" asp-append-version="true"></script>
+</body>
+</html>

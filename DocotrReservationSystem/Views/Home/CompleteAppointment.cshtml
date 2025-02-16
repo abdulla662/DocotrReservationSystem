@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Complete Appointment";
+}
+
+<h1>Complete Appointment with @Model.Name</h1>
+
+<form id="appointmentForm" method="post">
+    <div class="form-group">
+        <label for="patientName">Patient Name:</label>
+        <input type="text" class="form-control" id="patientName" name="patientName">
+        <small class="text-danger" id="patientNameError"></small>
+    </div>
+    <div class="form-group">
+        <label for="appointmentDate">Appointment Date:</label>
+        <input type="date" class="form-control" id="appointmentDate" name="appointmentDate">
+        <small class="text-danger" id="appointmentDateError"></small>
+    </div>
+    <div class="form-group">
+        <label for="appointmentTime">Appointment Time:</label>
+        <input type="time" class="form-control" id="appointmentTime" name="appointmentTime">
+        <small class="text-danger" id="appointmentTimeError"></small>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary" id="submitBtn">Complete Appointment</button>
+</form>
+
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Appointment Completed</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Your appointment has been successfully completed. Thank you!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var appointmentForm = document.getElementById('appointmentForm');
+        var submitBtn = document.getElementById('submitBtn');
+
+        appointmentForm.addEventListener('submit', function (e) {
+            var isValid = true;
+
+            // Get input values
+            var patientName = document.getElementById('patientName').value.trim();
+            var appointmentDate = document.getElementById('appointmentDate').value;
+            var appointmentTime = document.getElementById('appointmentTime').value;
+
+            // Get error fields
+            var patientNameError = document.getElementById('patientNameError');
+            var appointmentDateError = document.getElementById('appointmentDateError');
+            var appointmentTimeError = document.getElementById('appointmentTimeError');
+
+            // Clear previous errors
+            patientNameError.innerText = "";
+            appointmentDateError.innerText = "";
+            appointmentTimeError.innerText = "";
+
+            // Validate Patient Name
+            if (!patientName) {
+                patientNameError.innerText = "Patient Name is required.";
+                isValid = false;
+            }
+
+            // Validate Appointment Date
+            if (!appointmentDate) {
+                appointmentDateError.innerText = "Appointment Date is required.";
+                isValid = false;
+            } else {
+                var today = new Date().toISOString().split("T")[0];
+                if (appointmentDate < today) {
+                    appointmentDateError.innerText = "Date cannot be in the past.";
+                    isValid = false;
+                }
+            }
+
+            // Validate Appointment Time
+            if (!appointmentTime) {
+                appointmentTimeError.innerText = "Appointment Time is required.";
+                isValid = false;
+            }
+
+            // If the form is valid, show success modal
+            if (isValid) {
+                var myModal = new bootstrap.Modal(document.getElementById('successModal'), {
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                myModal.show();
+
+                e.preventDefault(); // Prevent actual form submission for now
+            } else {
+                e.preventDefault(); // Stop submission if validation fails
+            }
+        });
+    });
+</script>

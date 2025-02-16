@@ -1,0 +1,128 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&family=Roboto:wght@100;300&display=swap');
+
+/* Root Variables */
+:root {
+    --button: hsl(44, 0%, 70%);
+    --button-color: hsl(0, 0%, 4%);
+    --shadow: hsl(0, 0%, 0%);
+    --bg: linear-gradient(90deg, rgba(47,54,64,1) 23%, rgba(24,27,32,1) 100%);
+    --header: hsl(53, 0%, 48%);
+    --color: hsl(0, 0%, 98%);
+    --lit-header: hsl(53, 0%, 90%);
+    --speed: 2s;
+}
+
+/* Reset Body */
+html, body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Center Content */
+h1 {
+    animation: swing var(--speed) infinite alternate ease-in-out;
+    font-size: clamp(5rem, 40vmin, 20rem);
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    margin-bottom: 1rem;
+    letter-spacing: 1rem;
+    transform: translate3d(0, 0, 0vmin);
+    --x: calc(50% + (var(--swing-x) * 0.5) * 1%);
+    background: radial-gradient(var(--lit-header), var(--header) 45%) var(--x) 100% / 200% 200%;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* Cloak Effect */
+.cloak {
+    animation: swing var(--speed) infinite alternate-reverse ease-in-out;
+    height: 100%;
+    width: 100%;
+    transform-origin: 50% 30%;
+    transform: rotate(calc(var(--swing-x) * -0.25deg));
+    background: radial-gradient(40% 40% at 50% 42%, transparent, black 35%);
+}
+
+.cloak__wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+}
+
+.cloak__container {
+    height: 250vmax;
+    width: 250vmax;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Information Section */
+.info {
+    text-align: center;
+    line-height: 1.5;
+    max-width: clamp(16rem, 90vmin, 25rem);
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+    /* 404 Subtitle */
+    .info h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    /* 404 Description */
+    .info p {
+        font-weight: 300;
+        font-size: 1rem;
+        opacity: 0.7;
+        margin-bottom: 2rem;
+    }
+
+/* Button */
+.error-button {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 30px;
+    background: #e67e22;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    border: none;
+}
+
+    .error-button:hover {
+        background: #ff9800;
+        transform: scale(1.05);
+    }
+
+/* Keyframes for Swing Animation */
+@keyframes swing {
+    0% {
+        --swing-x: -100;
+        --swing-y: -100;
+    }
+
+    50% {
+        --swing-y: 0;
+    }
+
+    100% {
+        --swing-y: -100;
+        --swing-x: 100;
+    }
+}
